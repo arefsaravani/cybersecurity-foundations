@@ -1,6 +1,6 @@
 # Cybersecurity Foundations
 
-Hi, I'm Nine. This is where I put the things I build while learning Bash, Linux and Git.
+Hi, I'm Aref. This is where I put the things I build while learning Bash, Linux and Git.
 
 I don't want to only read tutorials, so I try to make small tools that actually do something. I make plenty of mistakes along the way, and the commit history shows all of them.
 
