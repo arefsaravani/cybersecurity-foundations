@@ -6,32 +6,32 @@ check_empty_passwords() {
   local empty_users
 
   if [[ "$(id -u)" -ne 0 ]]; then
-    echo "[SKIP] you have no privilege: run as root"
+    echo "[SKIP] Empty passwords: needs root (try: sudo ./hugin/hugin.sh)"
     return 2
   fi
 
   if [[ ! -f "$SHADOW_FILE" ]] || [[ ! -r "$SHADOW_FILE" ]]; then
-    echo "[SKIP] cannot read $SHADOW_FILE"
+    echo "[SKIP] Empty passwords: $SHADOW_FILE not found or not readable"
     return 2
   fi
 
   if ! empty_users=$(awk -F: '$2 == "" {print $1}' "$SHADOW_FILE"); then
-    echo "[SKIP] failed to parse $SHADOW_FILE"
+    echo "[SKIP] Empty passwords: could not parse $SHADOW_FILE"
     return 2
   fi
 
   if [[ -n "$empty_users" ]]; then
-    echo "[FAIL] users with empty passwords:"
+    echo "[FAIL] Empty passwords: these accounts have no password:"
     printf '%s\n' "$empty_users"
     return 1
   fi
 
-  echo "[PASS] no users with empty passwords found"
+  echo "[PASS] Empty passwords: no accounts with an empty password"
   return 0
 }
 
 main() {
-  echo "hugin: Linux Security Auditor"
+  echo "Hugin: Linux Security Auditor"
   check_empty_passwords
 }
 
